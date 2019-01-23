@@ -1,11 +1,11 @@
 <?php
-if (!getallheaders()['Authorization']&& \strpos($_SERVER['REQUEST_URI'], 'getToken?') === false){
-    http_response_code(404);
+if (!isset(getallheaders()['Authorization']) && \strpos($_SERVER['REQUEST_URI'], 'getToken?') === false){
+    http_response_code(401);
     echo 'unauthorized';
     die();
 }
 /// SETUP - NEED TO BE CHANGED
-$GLOBALS['token'] = getallheaders()['Authorization'];
+$GLOBALS['token'] = getallheaders()['Authorization']??'';
 $GLOBALS['domainname'] = 'http://localhost/moodle';
 $functionname = 'core_user_create_users';
 
